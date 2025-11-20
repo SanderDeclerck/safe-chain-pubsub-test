@@ -44,3 +44,4 @@ jobs:
         run: npx tap run --disable-coverage --safe-chain-logging=verbose
         env:
           PUBSUB_EMULATOR_HOST: localhost:8085
+          METADATA_SERVER_DETECTION: none
