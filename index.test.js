@@ -11,7 +11,7 @@ process.on('warning', (warning) => {
   }
 });
 
-t.test("pubsub test", async () => {
+t.test("pubsub test", async (t) => {
   const { PubSub } = require("@google-cloud/pubsub");
   const TOPIC_NAME = "demo-topic";
   const SUBSCRIPTION_NAME = "demo-subscription";
@@ -34,7 +34,7 @@ t.test("pubsub test", async () => {
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  t.ok(receivedMessage);
+  t.ok(receivedMessage, "message should be received");
 
   await subscription.close();
   await pubsub.close();
