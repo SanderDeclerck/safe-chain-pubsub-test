@@ -41,6 +41,6 @@ jobs:
           timeout 30 bash -c 'until curl -f http://localhost:8085; do sleep 2; done'
 
       - name: Run tests
-        run: npx tap run --disable-coverage
+        run: npx tap run --disable-coverage --safe-chain-logging=verbose
         env:
           PUBSUB_EMULATOR_HOST: localhost:8085
