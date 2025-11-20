@@ -22,7 +22,7 @@ t.test("pubsub test", async () => {
 
   await topic.publishMessage({ data: Buffer.from("test message") });
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 5000));
 
   t.ok(receivedMessage);
 
