@@ -28,6 +28,6 @@ t.test("pubsub test", async (t) => {
 
   t.ok(receivedMessage, "message should be received");
 
-  await subscription.close();
-  await pubsub.close();
+  // await subscription.close();
+  // await pubsub.close();
 });
