@@ -1,8 +1,18 @@
 const t = require("tap");
 
+// Set emulator host before importing PubSub to avoid metadata lookup
+process.env.PUBSUB_EMULATOR_HOST = "127.0.0.1:8085";
+
+// Suppress metadata lookup warnings in emulator mode
+process.removeAllListeners('warning');
+process.on('warning', (warning) => {
+  if (!warning.name?.includes('MetadataLookup')) {
+    console.warn(warning);
+  }
+});
+
 t.test("pubsub test", async () => {
   const { PubSub } = require("@google-cloud/pubsub");
-  process.env.PUBSUB_EMULATOR_HOST = "127.0.0.1:8085";
   const TOPIC_NAME = "demo-topic";
   const SUBSCRIPTION_NAME = "demo-subscription";
 
