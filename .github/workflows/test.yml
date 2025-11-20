@@ -23,7 +23,7 @@ jobs:
       - name: Setup safe-chain
         run: |
           npm i -g ./aikidosec-safe-chain-1.0.0.tgz
-          safe-chain setup-ci
+          # safe-chain setup-ci
 
       - name: Install dependencies
         run: npm ci
