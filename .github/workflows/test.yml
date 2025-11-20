@@ -1,0 +1,46 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      pubsub-emulator:
+        image: gcr.io/google.com/cloudsdktool/google-cloud-cli:emulators
+        ports:
+          - 8085:8085
+        options: >-
+          --health-cmd "curl -f http://localhost:8085 || exit 1"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        env:
+          PUBSUB_PROJECT_ID: test-project
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Wait for Pub/Sub emulator
+        run: |
+          timeout 30 bash -c 'until curl -f http://localhost:8085; do sleep 2; done'
+
+      - name: Run tests
+        run: npx tap run
+        env:
+          PUBSUB_EMULATOR_HOST: localhost:8085

@@ -1,0 +1,19 @@
+{
+  "name": "2025-11-20-safe-chain-pubsub-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@google-cloud/pubsub": "^5.2.0"
+  },
+  "devDependencies": {
+    "tap": "^21.1.5"
+  }
+}
